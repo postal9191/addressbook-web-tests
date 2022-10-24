@@ -12,7 +12,7 @@ public class GroupCreationTests {
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe"); //c:\chromedriver\102\chromedriver.exe
+    System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe");
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
   }

@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class GroupCreationTests {
-    private WebDriver wd;
+    private static ChromeDriver wd;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
@@ -58,7 +58,7 @@ public class GroupCreationTests {
         wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
-    private void initGroupCreation() {
+    public void initGroupCreation() {
         wd.findElement(By.name("new")).click();
     }
 

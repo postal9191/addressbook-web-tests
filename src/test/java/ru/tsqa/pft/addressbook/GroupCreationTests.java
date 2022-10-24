@@ -20,7 +20,7 @@ public class GroupCreationTests {
   @Test
   public void testGroupCreation() throws Exception {
     wd.get("http://localhost/addressbook/");
-    wd.findElement(By.id("LoginForm")).clear();//
+    wd.findElement(By.id("LoginForm")).clear();
     wd.findElement(By.id("LoginForm")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");

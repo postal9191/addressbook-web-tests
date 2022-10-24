@@ -12,7 +12,7 @@ public class GroupCreationTests {
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\102\\chromedriver.exe"); //c:\chromedriver\102\chromedriver.exe
+    System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe"); //c:\chromedriver\102\chromedriver.exe
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
   }
@@ -20,8 +20,8 @@ public class GroupCreationTests {
   @Test
   public void testGroupCreation() throws Exception {
     wd.get("http://localhost/addressbook/");
-    wd.findElement(By.id("LoginForm")).clear();
-    wd.findElement(By.id("LoginForm")).sendKeys("admin");
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();

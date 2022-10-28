@@ -1,9 +1,10 @@
-package ru.tsqa.pft.addressbook;
+package ru.tsqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import ru.tsqa.pft.addressbook.model.ContactData;
 
 import java.time.Duration;
 

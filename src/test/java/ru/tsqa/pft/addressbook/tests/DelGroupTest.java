@@ -2,7 +2,7 @@ package ru.tsqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
 
-public class DelGroup extends TestBase {
+public class DelGroupTest extends TestBase {
 
     @Test
     public void testDelGroup() {

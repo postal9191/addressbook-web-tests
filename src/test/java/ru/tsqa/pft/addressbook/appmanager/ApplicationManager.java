@@ -27,12 +27,12 @@ public class ApplicationManager {
     }
 
     public void stop() {
-        contactHelper.wd.quit();
+        wd.quit();
     }
 
     public boolean isElementPresent(By by) {
         try {
-            contactHelper.wd.findElement(by);
+            wd.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
             return false;

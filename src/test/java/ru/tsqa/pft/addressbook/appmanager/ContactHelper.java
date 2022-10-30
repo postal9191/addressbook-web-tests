@@ -44,4 +44,12 @@ public class ContactHelper extends HelperBase {
     public void returnHomePage() {
         click(By.linkText("home page"));
     }
+
+    public void selectContact() {
+        click(By.xpath("//*[@type='checkbox']"));
+    }
+
+    public void delContact() {
+        click(By.xpath("//*[@value='Delete']"));
+    }
 }

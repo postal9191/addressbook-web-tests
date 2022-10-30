@@ -18,4 +18,8 @@ public class SessionHelper extends HelperBase {
     public void logoutAddressBook() {
         click(By.linkText("Logout"));
     }
+
+    public void closeAlert() {
+        wd.switchTo().alert().accept();
+    }
 }

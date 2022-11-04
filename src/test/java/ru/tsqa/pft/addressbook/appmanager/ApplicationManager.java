@@ -2,21 +2,35 @@ package ru.tsqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Browser;
 
 import java.time.Duration;
 
 public class ApplicationManager {
-    ChromeDriver wd;
+    private final Browser browser;
+    WebDriver wd;
 
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
+    public ApplicationManager(Browser browser) {
+        this.browser = browser;
+    }
+
     public void init() {
-        System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe");
-        wd = new ChromeDriver();
+        if (browser == Browser.CHROME) {
+            System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe");
+            wd = new ChromeDriver();
+        } else if (browser == Browser.FIREFOX) {
+            System.setProperty("webdriver.gecko.driver", "c:\\chromedriver\\geckodriver.exe");
+            wd = new FirefoxDriver();
+        }
+
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);

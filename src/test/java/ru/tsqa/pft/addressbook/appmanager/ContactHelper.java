@@ -8,6 +8,7 @@ import ru.tsqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
 
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -32,12 +33,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), contactData.getTelHome());
         type(By.name("mobile"), contactData.getTelMobile());
         type(By.name("email"), contactData.getEmail());
-        group(contactData, creation);
+        groupInAddContact(contactData, creation);
     }
 
-    private void group(ContactData contactData, boolean creation) {
-        if (creation){
-            click(By.name("new_group"));
+    private void groupInAddContact(ContactData contactData, boolean creation) {
+        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroupName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -45,14 +45,32 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnHomePage() {
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
         click(By.linkText("home page"));
     }
 
     public void selectContact() {
-        click(By.xpath("//*[@type='checkbox']"));
+        click(By.name("selected[]"));
     }
 
     public void delContact() {
         click(By.xpath("//*[@value='Delete']"));
+    }
+
+    public void addContact(ContactData contact, boolean creation) {
+        clickAddNewContact();
+        fillContact(contact, creation);
+        submitContactCreation();
+        returnHomePage();
+    }
+
+    private void clickAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

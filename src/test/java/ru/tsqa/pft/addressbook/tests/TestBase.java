@@ -7,7 +7,7 @@ import ru.tsqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    ApplicationManager app = new ApplicationManager(Browser.FIREFOX);
+    ApplicationManager app = new ApplicationManager(Browser.OPERA);
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {

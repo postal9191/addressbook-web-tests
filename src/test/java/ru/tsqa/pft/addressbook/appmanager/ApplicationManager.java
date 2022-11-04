@@ -23,12 +23,15 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if (browser == Browser.CHROME) {
+        if (browser.equals(Browser.CHROME)) {
             System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe");
             wd = new ChromeDriver();
-        } else if (browser == Browser.FIREFOX) {
+        } else if (browser.equals(Browser.FIREFOX)) {
             System.setProperty("webdriver.gecko.driver", "c:\\chromedriver\\geckodriver.exe");
             wd = new FirefoxDriver();
+        } else if (browser.equals(Browser.OPERA)) {
+            System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\operadriver.exe");
+            wd = new ChromeDriver();//построен на базе Хромиум
         }
 
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));

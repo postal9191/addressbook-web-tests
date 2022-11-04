@@ -2,7 +2,6 @@ package ru.tsqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.tsqa.pft.addressbook.model.GroupData;
 
 public class GroupHelper extends HelperBase {
@@ -34,7 +33,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup() {
-        click(By.xpath("//div[@id='content']/form/span[2]/input"));
+        click(By.name("selected[]"));
     }
 
     public void initGroupModification() {
@@ -43,5 +42,16 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

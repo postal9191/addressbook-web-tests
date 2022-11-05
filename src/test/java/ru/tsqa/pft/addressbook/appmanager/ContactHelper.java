@@ -59,9 +59,9 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//*[@value='Delete']"));
     }
 
-    public void addContact(ContactData contact, boolean creation) {
+    public void addContact(ContactData contact) {
         clickAddNewContact();
-        fillContact(contact, creation);
+        fillContact(contact, true);
         submitContactCreation();
         returnHomePage();
     }

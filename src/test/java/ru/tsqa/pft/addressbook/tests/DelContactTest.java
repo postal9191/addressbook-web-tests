@@ -11,7 +11,7 @@ public class DelContactTest extends TestBase {
                 "112", "9379992", "Mail@mail.ru", "test10");
 
         if (! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().addContact(contact, true);
+            app.getContactHelper().addContact(contact);
         }
         app.getContactHelper().selectContact();
         app.getContactHelper().delContact();

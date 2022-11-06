@@ -12,8 +12,9 @@ public class AddContactTest extends TestBase {
         ContactData contact = new ContactData("Vladislav", "Suvorov", "POSTAL", "Google",
                 "112", "9379992", "Mail@mail.ru", "test10");
 
+
         app.getNavigationHelper().gotoGroupPage();
-        if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
+        if (!app.isElementPresent(By.xpath(String.format("//*[@title='Select (%s)']", contact.getGroupName())))) {
             app.getGroupHelper().createGroup(new GroupData("test10", "test2", "test3"));
         }
         app.getContactHelper().addContact(contact);

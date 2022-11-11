@@ -19,5 +19,4 @@ public class AddContactTest extends TestBase {
         }
         app.getContactHelper().addContact(contact);
     }
-
 }

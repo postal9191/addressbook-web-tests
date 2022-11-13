@@ -1,6 +1,7 @@
 package ru.tsqa.pft.addressbook.model;
 
 public class GroupData {
+    private int id = Integer.MAX_VALUE;
     private final String name;
     private final String header;
     private final String footer;
@@ -19,8 +20,6 @@ public class GroupData {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
-
-    private int id = Integer.MAX_VALUE;
 
     public GroupData(int id, String name, String header, String footer) {
         this.id = id;

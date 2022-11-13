@@ -1,7 +1,7 @@
 package ru.tsqa.pft.addressbook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import ru.tsqa.pft.addressbook.model.GroupData;
 
 import java.util.List;

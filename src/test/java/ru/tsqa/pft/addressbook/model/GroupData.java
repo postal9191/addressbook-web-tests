@@ -1,12 +1,12 @@
 package ru.tsqa.pft.addressbook.model;
 
 public class GroupData {
-    private String id = null;
     private final String name;
     private final String header;
     private final String footer;
+    private String id = null;
 
-    public GroupData(String id , String name, String header, String footer) {
+    public GroupData(String id, String name, String header, String footer) {
         this.id = id;
         this.name = name;
         this.header = header;

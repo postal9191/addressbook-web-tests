@@ -2,9 +2,9 @@ package ru.tsqa.pft.addressbook.model;
 
 public class GroupData {
     private int id = Integer.MAX_VALUE;
-    private final String name;
-    private final String header;
-    private final String footer;
+    private String name;
+    private String header;
+    private String footer;
 
     @Override
     public boolean equals(Object o) {
@@ -14,6 +14,26 @@ public class GroupData {
         GroupData groupData = (GroupData) o;
 
         return name != null ? name.equals(groupData.name) : groupData.name == null;
+    }
+
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public GroupData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
     }
 
     @Override
@@ -40,10 +60,6 @@ public class GroupData {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {

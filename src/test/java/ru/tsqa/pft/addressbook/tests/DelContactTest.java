@@ -17,9 +17,9 @@ public class DelContactTest extends TestBase {
                 "112", "9379992", "Mail@mail.ru", "test10");
 
         if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().gotoGroupPage();
+            app.goTo().groupPage();
             if (!app.isElementPresent(By.xpath(String.format("//*[@title='Select (%s)']", contact.getGroupName())))) {
-                app.getGroupHelper().createGroup(new GroupData("test10", "test2", "test3"));
+                app.group().create(new GroupData("test10", "test2", "test3"));
             }
             app.getContactHelper().addContact(contact);
         }
@@ -27,7 +27,7 @@ public class DelContactTest extends TestBase {
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().delContact();
         app.getSessionHelper().closeAlert();
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         app.getSessionHelper().logoutAddressBook();
         Assert.assertEquals(after.size(), before.size() - 1);

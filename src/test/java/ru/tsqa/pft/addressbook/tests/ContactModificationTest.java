@@ -17,9 +17,9 @@ public class ContactModificationTest extends TestBase {
                 "112", "9379992", "Mail@mail.ru", "test10");
 
         if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().gotoGroupPage();
+            app.goTo().groupPage();
             if (!app.isElementPresent(By.xpath(String.format("//*[@title='Select (%s)']", contact.getGroupName())))) {
-                app.getGroupHelper().createGroup(new GroupData("test10", "test2", "test3"));
+                app.group().create(new GroupData("test10", "test2", "test3"));
             }
             app.getContactHelper().addContact(contact);
         }

@@ -1,20 +1,20 @@
 package ru.tsqa.pft.addressbook.tests;
 
 import org.openqa.selenium.remote.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import ru.tsqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    ApplicationManager app = new ApplicationManager(Browser.CHROME);
+    static ApplicationManager app = new ApplicationManager(Browser.CHROME);
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeSuite
     public void setUp() throws Exception {
         app.init();
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterSuite
     public void tearDown() throws Exception {
         app.stop();
     }

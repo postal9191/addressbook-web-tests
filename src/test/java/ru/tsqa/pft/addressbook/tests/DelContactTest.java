@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DelContactTest extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void delContactTest() {
         ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
                 "112", "9379992", "Mail@mail.ru", "test10");

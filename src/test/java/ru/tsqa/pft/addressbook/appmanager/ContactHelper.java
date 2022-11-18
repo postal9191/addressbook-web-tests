@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.tsqa.pft.addressbook.model.ContactData;
+import ru.tsqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -17,8 +17,8 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void editContact(int index) {
-        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    public void editContact(int id) {
+        wd.findElement(By.xpath("//*[contains(@href,'id=" + id + "')]//img[@alt='Edit']")).click();
     }
 
     public void submitContactCreation() {
@@ -39,6 +39,18 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getTelMobile());
         type(By.name("email"), contactData.getEmail());
         groupInAddContact(contactData, creation);
+    }
+
+    public void fillAndUpdateContact(ContactData contactEdit) {
+        editContact(contactEdit.getId());
+        fillContact(contactEdit, false);
+        updateContact();
+        returnHomePage();
+    }
+
+    public void selectAndDelContact(Contacts before) {
+        selectContact(before.size() - 1);
+        delContact();
     }
 
     private void groupInAddContact(ContactData contactData, boolean creation) {
@@ -79,8 +91,8 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Contacts allContact() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> fieldNames = element.findElements(By.tagName("td"));

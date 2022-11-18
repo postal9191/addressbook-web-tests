@@ -1,41 +1,41 @@
 package ru.tsqa.pft.addressbook.tests;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.tsqa.pft.addressbook.model.ContactData;
+import ru.tsqa.pft.addressbook.model.Contacts;
 import ru.tsqa.pft.addressbook.model.GroupData;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class DelContactTest extends TestBase {
 
-    @Test(enabled = false)
-    public void delContactTest() {
-        ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
-                "112", "9379992", "Mail@mail.ru", "test10");
-
-        if (!app.getContactHelper().isThereAContact()) {
+    @BeforeMethod
+    private void precondition() {
+        if (app.contact().allContact().size() == 0) {
             app.goTo().groupPage();
-            if (!app.isElementPresent(By.xpath(String.format("//*[@title='Select (%s)']", contact.getGroupName())))) {
+            if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
-            app.getContactHelper().addContact(contact);
+            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
+                    "112", "9379992", "Mail@mail.ru", "test10"));
         }
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().delContact();
+    }
+
+    @Test
+    public void delContactTest() {
+        Contacts before = app.contact().allContact();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().selectAndDelContact(before);
         app.getSessionHelper().closeAlert();
         app.goTo().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        Contacts after = app.contact().allContact();
         app.getSessionHelper().logoutAddressBook();
-        Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size() - 1);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
+        assertEquals(after.size(), before.size() - 1);
+        assertThat(after, equalTo(before.withOut(deletedContact)));
     }
 }

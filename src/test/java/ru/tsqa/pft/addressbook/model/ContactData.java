@@ -14,6 +14,17 @@ public class ContactData {
     private String email;
     private String groupName;
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData setAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
+
     public ContactData(String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,6 +58,13 @@ public class ContactData {
         this.telHome =telHome;
         this.telMobile = telMobile;
         this.telWork = telWork;
+    }
+
+    public ContactData(int id, String firstName, String lastName, String allPhones) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.allPhones = allPhones;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ContactModificationTest extends TestBase {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
             app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
-                    "112", "9379992", "Mail@mail.ru", "test10"));
+                    "112", "9379992","6547", "Mail@mail.ru", "test10"));
         }
     }
 

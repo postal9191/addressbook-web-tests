@@ -37,8 +37,27 @@ public class ContactHelper extends HelperBase {
         type(By.name("company"), contactData.getCompany());
         type(By.name("home"), contactData.getTelHome());
         type(By.name("mobile"), contactData.getTelMobile());
+        type(By.name("work"), contactData.getTelWork());
         type(By.name("email"), contactData.getEmail());
         groupInAddContact(contactData, creation);
+    }
+
+    public void initContactModificationById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().setFirstName(firstname).setId(contact.getId()).setLastName(lastname).setTelHome(home).setTelMobile(mobile).setTelWork(work);
     }
 
     public void fillAndUpdateContact(ContactData contactEdit) {
@@ -95,10 +114,10 @@ public class ContactHelper extends HelperBase {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
-            List<WebElement> fieldNames = element.findElements(By.tagName("td"));
+            List<WebElement> cells = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            ContactData contact = new ContactData(id, fieldNames.get(2).getText(), fieldNames.get(1).getText());
-            contacts.add(contact);
+            String[] phones = cells.get(5).getText().split("\n");
+            contacts.add(new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), phones[0], phones[1], phones[2]));
         }
         return contacts;
     }

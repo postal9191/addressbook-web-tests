@@ -4,14 +4,12 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.tsqa.pft.addressbook.model.ContactData;
-import ru.tsqa.pft.addressbook.model.Contacts;
 import ru.tsqa.pft.addressbook.model.GroupData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class DelContactTest extends TestBase {
+public class ContactPhoneTest extends TestBase {
 
     @BeforeMethod
     private void precondition() {
@@ -26,16 +24,19 @@ public class DelContactTest extends TestBase {
     }
 
     @Test
-    public void delContactTest() {
-        Contacts before = app.contact().allContact();
-        ContactData deletedContact = before.iterator().next();
-        app.contact().selectAndDelContact(before);
-        app.getSessionHelper().closeAlert();
+    public void testAddContact() {
         app.goTo().gotoHomePage();
-        Contacts after = app.contact().allContact();
-        app.getSessionHelper().logoutAddressBook();
+        ContactData contact = app.contact().allContact().iterator().next();
+        System.out.println(contact);
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        System.out.println(contactInfoFromEditForm);
 
-        assertEquals(after.size(), before.size() - 1);
-        assertThat(after, equalTo(before.withOut(deletedContact)));
+        assertThat(contact.getTelHome(), equalTo(cleaned(contactInfoFromEditForm.getTelHome())));
+        assertThat(contact.getTelMobile(), equalTo(cleaned(contactInfoFromEditForm.getTelMobile())));
+        assertThat(contact.getTelWork(), equalTo(cleaned(contactInfoFromEditForm.getTelWork())));
+    }
+
+    public String cleaned (String phone) {
+        return phone.replaceAll("\\s","").replaceAll("[-()]","");
     }
 }

@@ -10,10 +10,11 @@ public class ContactData {
     private String company;
     private String telHome;
     private String telMobile;
+    private String telWork;
     private String email;
     private String groupName;
 
-    public ContactData(String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String email, String groupName) {
+    public ContactData(String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -21,6 +22,7 @@ public class ContactData {
         this.company = company;
         this.telHome = telHome;
         this.telMobile = telMobile;
+        this.telWork = telWork;
         this.email = email;
         this.groupName = groupName;
     }
@@ -38,10 +40,13 @@ public class ContactData {
         this.groupName = groupName;
     }
 
-    public ContactData(int id, String firstName, String lastName) {
+    public ContactData(int id, String firstName, String lastName, String telHome, String telMobile,String telWork) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.telHome =telHome;
+        this.telMobile = telMobile;
+        this.telWork = telWork;
     }
 
     @Override
@@ -53,7 +58,10 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (telHome != null ? !telHome.equals(that.telHome) : that.telHome != null) return false;
+        if (telMobile != null ? !telMobile.equals(that.telMobile) : that.telMobile != null) return false;
+        return telWork != null ? telWork.equals(that.telWork) : that.telWork == null;
     }
 
     @Override
@@ -61,7 +69,13 @@ public class ContactData {
         int result = id;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (telHome != null ? telHome.hashCode() : 0);
+        result = 31 * result + (telMobile != null ? telMobile.hashCode() : 0);
+        result = 31 * result + (telWork != null ? telWork.hashCode() : 0);
         return result;
+    }
+
+    public ContactData() {
     }
 
     public ContactData setId(int id) {
@@ -76,6 +90,25 @@ public class ContactData {
 
     public ContactData setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData setTelHome(String telHome) {
+        this.telHome = telHome;
+        return this;
+    }
+
+    public ContactData setTelMobile(String telMobile) {
+        this.telMobile = telMobile;
+        return this;
+    }
+
+    public String getTelWork() {
+        return telWork;
+    }
+
+    public ContactData setTelWork(String telWork) {
+        this.telWork = telWork;
         return this;
     }
 

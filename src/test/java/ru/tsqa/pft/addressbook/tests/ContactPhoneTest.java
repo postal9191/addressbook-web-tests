@@ -21,7 +21,7 @@ public class ContactPhoneTest extends TestBase {
             if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
-            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
+            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
                     "112", "9379992", "6547", "Mail@mail.ru", "test10"));
         }
     }
@@ -43,7 +43,31 @@ public class ContactPhoneTest extends TestBase {
                     .collect(Collectors.joining("\n"));
         }
 
-        public static String cleaned (String phone){
-            return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
-        }
+    public static String cleaned (String phone){
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
+
+    @Test
+    public void testContactEmailAndAddress() {
+        app.goTo().gotoHomePage();
+        ContactData contact = app.contact().allContact().iterator().next();
+        System.out.println(contact);
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        System.out.println(contactInfoFromEditForm);
+
+        assertThat(contact.getEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
+    }
+
+    private String mergeAddress(ContactData contact) {
+        return Arrays.asList(contact.getAddress())
+                .stream().filter((s) -> !s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
+
+    private String mergeEmail(ContactData contact) {
+        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter((s) -> !s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
+}

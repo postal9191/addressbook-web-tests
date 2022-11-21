@@ -23,7 +23,7 @@ public class AddContactTest extends TestBase {
 
     @Test
     public void testAddContact() {
-        ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
+        ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
                 "112", "9379992","6547", "Mail@mail.ru", "test10");
 
         app.goTo().gotoHomePage();

@@ -11,8 +11,49 @@ public class ContactData {
     private String telHome;
     private String telMobile;
     private String telWork;
-    private String email;
     private String groupName;
+    private String allPhones;
+    private String email;
+    private String address;
+    private String email2;
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactData setEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactData setEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    private String email3;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ContactData setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ContactData setAddress(String address) {
+        this.address = address;
+        return this;
+    }
 
     public String getAllPhones() {
         return allPhones;
@@ -23,13 +64,12 @@ public class ContactData {
         return this;
     }
 
-    private String allPhones;
-
-    public ContactData(String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
+    public ContactData(String firstName, String lastName, String middleName, String nickName, String address, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.nickName = nickName;
+        this.address = address;
         this.company = company;
         this.telHome = telHome;
         this.telMobile = telMobile;
@@ -167,9 +207,6 @@ public class ContactData {
         return telMobile;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
     public ContactData setGroupName(String groupName) {
         this.groupName = groupName;

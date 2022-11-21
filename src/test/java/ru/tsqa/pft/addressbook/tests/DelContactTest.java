@@ -20,7 +20,7 @@ public class DelContactTest extends TestBase {
             if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
-            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "Google",
+            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
                     "112", "9379992","6547", "Mail@mail.ru", "test10"));
         }
     }

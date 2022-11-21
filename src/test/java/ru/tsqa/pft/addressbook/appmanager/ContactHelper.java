@@ -35,6 +35,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("nickname"), contactData.getNickName());
         type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getTelHome());
         type(By.name("mobile"), contactData.getTelMobile());
         type(By.name("work"), contactData.getTelWork());
@@ -56,8 +57,14 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().setFirstName(firstname).setId(contact.getId()).setLastName(lastname).setTelHome(home).setTelMobile(mobile).setTelWork(work);
+        return new ContactData().setFirstName(firstname)
+                .setId(contact.getId()).setLastName(lastname).setTelHome(home).setTelMobile(mobile).setTelWork(work)
+                .setAddress(address).setEmail(email).setEmail2(email2).setEmail3(email3);
     }
 
     public void fillAndUpdateContact(ContactData contactEdit) {
@@ -117,7 +124,10 @@ public class ContactHelper extends HelperBase {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             String allPhones = cells.get(5).getText();
-            contacts.add(new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), allPhones));
+            String allEmail = cells.get(4).getText();
+            String allAddress = cells.get(3).getText();
+            contacts.add(new ContactData().setId(id).setFirstName(cells.get(2).getText()).setLastName(cells.get(1).getText())
+                    .setAllPhones(allPhones).setEmail(allEmail).setAddress(allAddress));
         }
         return contacts;
     }

@@ -11,11 +11,31 @@ public class ContactData {
     private String telHome;
     private String telMobile;
     private String telWork;
+    private String fax;
     private String groupName;
     private String allPhones;
     private String email;
     private String address;
     private String email2;
+    private String secondaryHome;
+
+    public String getSecondaryHome() {
+        return secondaryHome;
+    }
+
+    public ContactData setSecondaryHome(String secondaryHome) {
+        this.secondaryHome = secondaryHome;
+        return this;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public ContactData setFax(String fax) {
+        this.fax = fax;
+        return this;
+    }
 
     public String getEmail2() {
         return email2;

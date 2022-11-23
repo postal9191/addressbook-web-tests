@@ -21,7 +21,8 @@ public class ContactPhoneTest extends TestBase {
             if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
-            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
+            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin",
+                    "POSTAL", "сегодня такой www.leningradspb.ru", "Google",
                     "112", "9379992", "6547", "Mail@mail.ru", "test10"));
         }
     }
@@ -35,28 +36,19 @@ public class ContactPhoneTest extends TestBase {
         System.out.println(contactInfoFromEditForm);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+        assertThat(contact.getEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
     }
-        private String mergePhones (ContactData contact){
-            return Arrays.asList(contact.getTelHome(), contact.getTelMobile(), contact.getTelWork())
-                    .stream().filter((s) -> !s.equals(""))
-                    .map(ContactPhoneTest::cleaned)
-                    .collect(Collectors.joining("\n"));
-        }
 
-    public static String cleaned (String phone){
+    public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 
-    @Test
-    public void testContactEmailAndAddress() {
-        app.goTo().gotoHomePage();
-        ContactData contact = app.contact().allContact().iterator().next();
-        System.out.println(contact);
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-        System.out.println(contactInfoFromEditForm);
-
-        assertThat(contact.getEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
-        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
+    private String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getTelHome(), contact.getTelMobile(), contact.getTelWork(), contact.getSecondaryHome())
+                .stream().filter((s) -> !s.equals(""))
+                .map(ContactPhoneTest::cleaned)
+                .collect(Collectors.joining("\n"));
     }
 
     private String mergeAddress(ContactData contact) {

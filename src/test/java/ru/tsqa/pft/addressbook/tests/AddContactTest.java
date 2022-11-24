@@ -8,6 +8,8 @@ import ru.tsqa.pft.addressbook.model.ContactData;
 import ru.tsqa.pft.addressbook.model.Contacts;
 import ru.tsqa.pft.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
@@ -23,8 +25,10 @@ public class AddContactTest extends TestBase {
 
     @Test
     public void testAddContact() {
-        ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
-                "112", "9379992","6547", "Mail@mail.ru", "test10");
+        /*ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
+                "112", "9379992","6547", "Mail@mail.ru", "test10");*/
+        File photo = new File("src/test/resources/cat.jpg");
+        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);
 
         app.goTo().gotoHomePage();
         Contacts before = app.contact().allContact();
@@ -36,4 +40,12 @@ public class AddContactTest extends TestBase {
                 before.withAdded(contact.setId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
     }
 
+    @Test(enabled = false)
+    public void testCurrentDir () {
+        File currentDir = new File(".");
+        System.out.println(currentDir.getAbsolutePath());
+        File photo = new File("src/test/resources/cat.jpg");
+        System.out.println(photo.getAbsolutePath());
+        System.out.println(photo.exists());
+    }
 }

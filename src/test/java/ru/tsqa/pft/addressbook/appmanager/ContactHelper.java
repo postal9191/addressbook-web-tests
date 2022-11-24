@@ -34,6 +34,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("nickname"), contactData.getNickName());
+        attach(By.name("photo"), contactData.getPhoto());
         type(By.name("company"), contactData.getCompany());
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getTelHome());
@@ -82,10 +83,12 @@ public class ContactHelper extends HelperBase {
     }
 
     private void groupInAddContact(ContactData contactData, boolean creation) {
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroupName());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        if (contactData.getGroupName() != null) {
+            if (creation) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroupName());
+            } else {
+                Assert.assertFalse(isElementPresent(By.name("new_group")));
+            }
         }
     }
 

@@ -37,7 +37,8 @@ public class ContactPhoneTest extends TestBase {
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
         assertThat(contact.getEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
-        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
+        //assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm))); //не требуется переводить в список и конвертировать обратно.
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     }
 
     public static String cleaned(String phone) {

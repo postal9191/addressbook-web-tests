@@ -6,6 +6,9 @@ public class GroupData {
     private String header;
     private String footer;
 
+    public GroupData() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

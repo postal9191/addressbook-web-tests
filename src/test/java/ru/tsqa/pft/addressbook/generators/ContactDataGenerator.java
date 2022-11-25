@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDataGenerator {
-    @Parameter(names = "-c", description = "Group count")
+    @Parameter(names = "-c", description = "Contact count")
     public int count;
 
     @Parameter(names = "-f", description = "Target file")
@@ -81,10 +81,12 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++){
             contacts.add(new ContactData().setFirstName(String.format("name %s", i)).setLastName(String.format("lastname %s", i))
-                    .setAddress(String.format("address %s", i)).setTelMobile(String.format("mobile %s", i))
-                    .setTelHome(String.format("%s937", i)).setTelWork(String.format("%s99", i))
-                    .setEmail(String.format("email1@email.ru %s", i))
-                    .setEmail2(String.format("email2@email.ru %s", i)).setEmail3(String.format("email3@email.ru %s", i)));
+                    .setAddress(String.format("address %s", i)).setTelMobile(String.format("1%s937", i)));
+            /*contacts.add(new ContactData().setFirstName(String.format("name %s", i)).setLastName(String.format("lastname %s", i))
+                    .setAddress(String.format("address %s", i)).setTelMobile(String.format("%s937", i))
+                    .setTelHome(String.format("%s99", i)).setTelWork(String.format("%s92", i))
+                    .setEmail(String.format("email%s@email.ru", i)).setEmail2(String.format("email%s@email.ru", i))
+                    .setEmail3(String.format("email%s@email.ru", i)));*/
         }
         return contacts;
     }

@@ -66,14 +66,12 @@ public class AddContactTest extends TestBase {
     @Test
     public void testAddContact() {
         File photo = new File("src/test/resources/cat.jpg");
-        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setEmail("sad@sad").setEmail3("saad@saad").setPhoto(photo);
+        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);
 
         app.goTo().gotoHomePage();
         Contacts before = app.contact().allContact();
         app.contact().addContact(contact);
         Contacts after = app.contact().allContact();
-
-        System.out.println(after);
 
         assertEquals(after.size(), before.size() + 1);
         assertThat(after, equalTo(before.withAdded(contact.setId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
@@ -81,11 +79,6 @@ public class AddContactTest extends TestBase {
 
     @Test(dataProvider = "validContactsFromJson")
     public void testAddContactJsonOrXml(ContactData contact) {
-        /*ContactData contact = new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
-                "112", "9379992","6547", "Mail@mail.ru", "test10");*/
-        //File photo = new File("src/test/resources/cat.jpg");
-        // ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);
-
         app.goTo().gotoHomePage();
         Contacts before = app.contact().allContact();
         app.contact().addContact(contact);
@@ -93,7 +86,6 @@ public class AddContactTest extends TestBase {
 
         assertEquals(after.size(), before.size() + 1);
         assertThat(after, equalTo(before.withAdded(contact.setId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
-        //assertThat(after, CoreMatchers.equalTo(before));
     }
 
     @Test(enabled = false)

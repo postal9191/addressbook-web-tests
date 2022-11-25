@@ -2,7 +2,11 @@
   {
     "firstName": "name 0",
     "lastName": "lastname 0",
-    "telMobile": "10937",
-    "address": "address 0"
+    "telHome": "099",
+    "telMobile": "0937",
+    "telWork": "092",
+    "email": "0email@email.ru",
+    "address": "address 0",
+    "email2": "0email@email.ru"
   }
 ]

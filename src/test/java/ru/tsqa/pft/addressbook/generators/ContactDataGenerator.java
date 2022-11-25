@@ -30,7 +30,7 @@ public class ContactDataGenerator {
         JCommander jCommander = new JCommander(generator);
         try {
             jCommander.parse(args);
-        } catch (ParameterException ex){
+        } catch (ParameterException ex) {
             jCommander.usage();
             return;
         }
@@ -41,7 +41,7 @@ public class ContactDataGenerator {
         List<ContactData> contacts = generateContacts(count);
         if (format.equals("csv")) {
             saveAsCsv(contacts, new File(file));
-        } else if (format.equals("xml")){
+        } else if (format.equals("xml")) {
             saveAsXml(contacts, new File(file));
         } else if (format.equals("json")) {
             saveAsJson(contacts, new File(file));
@@ -53,7 +53,7 @@ public class ContactDataGenerator {
     private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(contacts);
-        try(Writer writer = new FileWriter(file)){
+        try (Writer writer = new FileWriter(file)) {
             writer.write(json);
         }
     }
@@ -62,16 +62,16 @@ public class ContactDataGenerator {
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactData.class);
         String xml = xstream.toXML(contacts);
-        try(Writer writer = new FileWriter(file)){
+        try (Writer writer = new FileWriter(file)) {
             writer.write(xml);
         }
     }
 
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        try(Writer writer = new FileWriter(file)){
-            for(ContactData contact : contacts){
+        try (Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
                 writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstName(), contact.getLastName()
-                        , contact.getAddress(), contact.getTelMobile(),contact.getTelHome(), contact.getTelWork()
+                        , contact.getAddress(), contact.getTelMobile(), contact.getTelHome(), contact.getTelWork()
                         , contact.getEmail(), contact.getEmail2(), contact.getEmail3()));
             }
         }
@@ -79,14 +79,12 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().setFirstName(String.format("name %s", i)).setLastName(String.format("lastname %s", i))
-                    .setAddress(String.format("address %s", i)).setTelMobile(String.format("1%s937", i)));
-            /*contacts.add(new ContactData().setFirstName(String.format("name %s", i)).setLastName(String.format("lastname %s", i))
                     .setAddress(String.format("address %s", i)).setTelMobile(String.format("%s937", i))
                     .setTelHome(String.format("%s99", i)).setTelWork(String.format("%s92", i))
-                    .setEmail(String.format("email%s@email.ru", i)).setEmail2(String.format("email%s@email.ru", i))
-                    .setEmail3(String.format("email%s@email.ru", i)));*/
+                    .setEmail(String.format("%semail@email.ru", i)).setEmail2(String.format("%semail@email.ru", i))
+                    .setEmail3(String.format("%semail@email.ru", i)));
         }
         return contacts;
     }

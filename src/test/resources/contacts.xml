@@ -1,0 +1,35 @@
+<list>
+  <contact>
+    <firstName>name 0</firstName>
+    <lastName>lastname 0</lastName>
+    <telHome>0937</telHome>
+    <telMobile>mobile 0</telMobile>
+    <telWork>099</telWork>
+    <email>email1@email.ru 0</email>
+    <address>address 0</address>
+    <email2>email2@email.ru 0</email2>
+    <email3>email3@email.ru 0</email3>
+  </contact>
+  <contact>
+    <firstName>name 1</firstName>
+    <lastName>lastname 1</lastName>
+    <telHome>1937</telHome>
+    <telMobile>mobile 1</telMobile>
+    <telWork>199</telWork>
+    <email>email1@email.ru 1</email>
+    <address>address 1</address>
+    <email2>email2@email.ru 1</email2>
+    <email3>email3@email.ru 1</email3>
+  </contact>
+  <contact>
+    <firstName>name 2</firstName>
+    <lastName>lastname 2</lastName>
+    <telHome>2937</telHome>
+    <telMobile>mobile 2</telMobile>
+    <telWork>299</telWork>
+    <email>email1@email.ru 2</email>
+    <address>address 2</address>
+    <email2>email2@email.ru 2</email2>
+    <email3>email3@email.ru 2</email3>
+  </contact>
+</list>

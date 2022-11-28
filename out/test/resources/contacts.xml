@@ -5,31 +5,9 @@
     <telHome>099</telHome>
     <telMobile>0937</telMobile>
     <telWork>092</telWork>
-    <email>email0@email.ru</email>
+    <email>0email@email.ru</email>
     <address>address 0</address>
-    <email2>email0@email.ru</email2>
-    <email3>email0@email.ru</email3>
-  </contact>
-  <contact>
-    <firstName>name 1</firstName>
-    <lastName>lastname 1</lastName>
-    <telHome>199</telHome>
-    <telMobile>1937</telMobile>
-    <telWork>192</telWork>
-    <email>email1@email.ru</email>
-    <address>address 1</address>
-    <email2>email1@email.ru</email2>
-    <email3>email1@email.ru</email3>
-  </contact>
-  <contact>
-    <firstName>name 2</firstName>
-    <lastName>lastname 2</lastName>
-    <telHome>299</telHome>
-    <telMobile>2937</telMobile>
-    <telWork>292</telWork>
-    <email>email2@email.ru</email>
-    <address>address 2</address>
-    <email2>email2@email.ru</email2>
-    <email3>email2@email.ru</email3>
+    <email2>0email@email.ru</email2>
+    <email3>0email@email.ru</email3>
   </contact>
 </list>

@@ -27,32 +27,36 @@ public class AddContactTest extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validContactsFromXml() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-        String xml = "";
-        String line = reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(ContactData.class);
+            xstream.allowTypes(new Class[]{ContactData.class});// в лекции данной строки нет, но без нее не работают тесты
+            List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
+            return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+
         }
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        xstream.allowTypes(new Class[]{ContactData.class});// в лекции данной строки нет, но без нее не работают тесты
-        List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-        return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validContactsFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+        try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))){
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
+            }.getType()); // List<GroupData.class> тоже самое
+            return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType()); // List<GroupData.class> тоже самое
-        return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
 
     @BeforeMethod
@@ -89,7 +93,7 @@ public class AddContactTest extends TestBase {
     }
 
     @Test(enabled = false)
-    public void testCurrentDir () {
+    public void testCurrentDir() {
         File currentDir = new File(".");
         System.out.println(currentDir.getAbsolutePath());
         File photo = new File("src/test/resources/cat.jpg");

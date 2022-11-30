@@ -15,6 +15,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'ch.qos.logback:logback-classic:1.1.5'
     implementation 'mysql:mysql-connector-java:8.0.31'
+    implementation 'org.hibernate:hibernate-core:5.6.14.Final'
 }
 
 

@@ -3,53 +3,151 @@ package ru.tsqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "firstName")
     private String firstName;
+
     @Expose
+    @Column(name = "lastName")
     private String lastName;
+
     @Expose
-    private String middleName;
-    @Expose
-    private String nickName;
-    @Expose
-    private String company;
-    @Expose
-    private String telHome;
-    @Expose
-    private String telMobile;
-    @Expose
-    private String telWork;
-    @Expose
-    private String fax;
-    @Expose
-    private String groupName;
-    @Expose
-    private String allPhones;
-    @Expose
-    private String email;
-    @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
+
     @Expose
+    @Column(name = "middleName")
+    private String middleName;
+
+    @Expose
+    @Column(name = "nickName")
+    private String nickName;
+
+    @Expose
+    @Column(name = "company")
+    private String company;
+
+    @Expose
+    @Column(name = "home")
+    @Type(type = "text")
+    private String telHome;
+
+    @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
+    private String telMobile;
+
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
+    private String telWork;
+
+    @Expose
+    @Column(name = "fax")
+    @Type(type = "text")
+    private String fax;
+
+    @Expose
+    @Transient
+    private String groupName;
+
+    @Expose
+    @Transient
+    private String allPhones;
+
+    @Expose
+    @Column(name = "email")
+    @Type(type = "text")
+    private String email;
+
+    @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
+    private String email3;
+
+    @Expose
+    @Column(name = "phone2")
+    @Type(type = "text")
     private String secondaryHome;
+
     @Expose
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    public ContactData(String firstName, String lastName, String middleName, String nickName, String address, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.nickName = nickName;
+        this.address = address;
+        this.company = company;
+        this.telHome = telHome;
+        this.telMobile = telMobile;
+        this.telWork = telWork;
+        this.email = email;
+        this.groupName = groupName;
+    }
+
+    public ContactData(int id, String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String email, String groupName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.nickName = nickName;
+        this.company = company;
+        this.telHome = telHome;
+        this.telMobile = telMobile;
+        this.email = email;
+        this.groupName = groupName;
+    }
+
+    public ContactData(int id, String firstName, String lastName, String telHome, String telMobile, String telWork) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telHome = telHome;
+        this.telMobile = telMobile;
+        this.telWork = telWork;
+    }
+
+    public ContactData(int id, String firstName, String lastName, String allPhones) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.allPhones = allPhones;
+    }
+
+    public ContactData() {
+    }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData setPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -89,8 +187,6 @@ public class ContactData {
         return this;
     }
 
-    private String email3;
-
     public String getEmail() {
         return email;
     }
@@ -118,52 +214,6 @@ public class ContactData {
         return this;
     }
 
-    public ContactData(String firstName, String lastName, String middleName, String nickName, String address, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.nickName = nickName;
-        this.address = address;
-        this.company = company;
-        this.telHome = telHome;
-        this.telMobile = telMobile;
-        this.telWork = telWork;
-        this.email = email;
-        this.groupName = groupName;
-    }
-
-    public ContactData(int id, String firstName, String lastName, String middleName, String nickName, String company, String telHome, String telMobile, String email, String groupName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.nickName = nickName;
-        this.company = company;
-        this.telHome = telHome;
-        this.telMobile = telMobile;
-        this.email = email;
-        this.groupName = groupName;
-    }
-
-    public ContactData(int id, String firstName, String lastName, String telHome, String telMobile,String telWork) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.telHome =telHome;
-        this.telMobile = telMobile;
-        this.telWork = telWork;
-    }
-
-    public ContactData(int id, String firstName, String lastName, String allPhones) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.allPhones = allPhones;
-    }
-
-    public ContactData() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -184,31 +234,6 @@ public class ContactData {
         return result;
     }
 
-    public ContactData setId(int id) {
-        this.id = id;
-        return this;
-    }
-
-    public ContactData setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public ContactData setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public ContactData setTelHome(String telHome) {
-        this.telHome = telHome;
-        return this;
-    }
-
-    public ContactData setTelMobile(String telMobile) {
-        this.telMobile = telMobile;
-        return this;
-    }
-
     public String getTelWork() {
         return telWork;
     }
@@ -224,6 +249,21 @@ public class ContactData {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", company='" + company + '\'' +
+                ", telHome='" + telHome + '\'' +
+                ", telMobile='" + telMobile + '\'' +
+                ", telWork='" + telWork + '\'' +
+                ", fax='" + fax + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", allPhones='" + allPhones + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", secondaryHome='" + secondaryHome + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 
@@ -231,8 +271,18 @@ public class ContactData {
         return id;
     }
 
+    public ContactData setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
+    }
+
+    public ContactData setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
     }
 
     public String getMiddleName() {
@@ -251,13 +301,17 @@ public class ContactData {
         return telHome;
     }
 
+    public ContactData setTelHome(String telHome) {
+        this.telHome = telHome;
+        return this;
+    }
+
     public String getTelMobile() {
         return telMobile;
     }
 
-
-    public ContactData setGroupName(String groupName) {
-        this.groupName = groupName;
+    public ContactData setTelMobile(String telMobile) {
+        this.telMobile = telMobile;
         return this;
     }
 
@@ -265,8 +319,18 @@ public class ContactData {
         return groupName;
     }
 
+    public ContactData setGroupName(String groupName) {
+        this.groupName = groupName;
+        return this;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public ContactData setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
     }
 
 }

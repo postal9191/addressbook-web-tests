@@ -1,6 +1,5 @@
 package ru.tsqa.pft.addressbook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.tsqa.pft.addressbook.model.ContactData;
@@ -15,24 +14,24 @@ public class DelContactTest extends TestBase {
 
     @BeforeMethod
     private void precondition() {
-        if (app.contact().allContact().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.goTo().groupPage();
-            if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
+            if (app.db().groups().size() == 0) {
                 app.group().create(new GroupData("test10", "test2", "test3"));
             }
-            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL","сегодня такой www.leningradspb.ru", "Google",
-                    "112", "9379992","6547", "Mail@mail.ru", "test10"));
+            app.contact().addContact(new ContactData("Vladislav", "Suvorov", "pupkin", "POSTAL", "сегодня такой www.leningradspb.ru", "Google",
+                    "112", "9379992", "6547", "Mail@mail.ru", "test10"));
         }
     }
 
     @Test
     public void delContactTest() {
-        Contacts before = app.contact().allContact();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().selectAndDelContact(before);
         app.getSessionHelper().closeAlert();
         app.goTo().gotoHomePage();
-        Contacts after = app.contact().allContact();
+        Contacts after = app.db().contacts();
         app.getSessionHelper().logoutAddressBook();
 
         assertEquals(after.size(), before.size() - 1);

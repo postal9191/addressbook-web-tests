@@ -2,7 +2,6 @@ package ru.tsqa.pft.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
-import org.openqa.selenium.By;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -61,8 +60,8 @@ public class AddContactTest extends TestBase {
 
     @BeforeMethod
     public void precondition() {
-        app.goTo().groupPage();
-        if (!app.isElementPresent(By.xpath("//*[@title='Select (test10)']"))) {
+        if(app.db().groups().size() == 0) {
+            app.goTo().groupPage();
             app.group().create(new GroupData("test10", "test2", "test3"));
         }
     }
@@ -73,9 +72,9 @@ public class AddContactTest extends TestBase {
         ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);
 
         app.goTo().gotoHomePage();
-        Contacts before = app.contact().allContact();
+        Contacts before = app.db().contacts();
         app.contact().addContact(contact);
-        Contacts after = app.contact().allContact();
+        Contacts after = app.db().contacts();
 
         assertEquals(after.size(), before.size() + 1);
         assertThat(after, equalTo(before.withAdded(contact.setId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
@@ -84,9 +83,9 @@ public class AddContactTest extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testAddContactJsonOrXml(ContactData contact) {
         app.goTo().gotoHomePage();
-        Contacts before = app.contact().allContact();
+        Contacts before = app.db().contacts();
         app.contact().addContact(contact);
-        Contacts after = app.contact().allContact();
+        Contacts after = app.db().contacts();
 
         assertEquals(after.size(), before.size() + 1);
         assertThat(after, equalTo(before.withAdded(contact.setId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));

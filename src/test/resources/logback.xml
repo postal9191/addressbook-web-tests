@@ -2,7 +2,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logFile.log</file>
-        <!--<append>true</append>  добавлять логи в тот же файл если убрать будет перезаписывать-->
+        <append>true</append>  <!-- добавлять логи в тот же файл если убрать будет перезаписывать-->
         <!-- set immediateFlush to false for much higher logging throughput -->
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type

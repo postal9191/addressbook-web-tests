@@ -32,5 +32,6 @@ public class DelGroupTest extends TestBase {
 
         assertThat(after, equalTo(before.withOut(deletedGroup)));
 
+        verifyGroupListInUI();
     }
 }

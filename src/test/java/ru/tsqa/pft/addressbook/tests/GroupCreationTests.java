@@ -70,6 +70,7 @@ public class GroupCreationTests extends TestBase {
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
 
+        verifyGroupListInUI();
     }
 
     @Test
@@ -85,5 +86,7 @@ public class GroupCreationTests extends TestBase {
 
         assertThat(after.size(), equalTo(before.size()));
         assertThat(after, equalTo(before));
+
+        verifyGroupListInUI();
     }
 }

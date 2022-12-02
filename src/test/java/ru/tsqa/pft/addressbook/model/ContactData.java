@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -96,6 +98,11 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
+    @ManyToMany(fetch = FetchType.EAGER) // настройка захватывает все связи до закрытия сессии
+    @JoinTable (name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     public ContactData(String firstName, String lastName, String middleName, String nickName, String address, String company, String telHome, String telMobile, String telWork, String email, String groupName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -143,7 +150,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        if(photo != null){
+        if (photo != null) {
             return new File(photo);
         }
         return null;
@@ -260,7 +267,6 @@ public class ContactData {
                 ", telMobile='" + telMobile + '\'' +
                 ", telWork='" + telWork + '\'' +
                 ", fax='" + fax + '\'' +
-                ", groupName='" + groupName + '\'' +
                 ", allPhones='" + allPhones + '\'' +
                 ", email='" + email + '\'' +
                 ", email2='" + email2 + '\'' +
@@ -318,6 +324,10 @@ public class ContactData {
         return this;
     }
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
     public String getGroupName() {
         return groupName;
     }
@@ -333,6 +343,11 @@ public class ContactData {
 
     public ContactData setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
         return this;
     }
 

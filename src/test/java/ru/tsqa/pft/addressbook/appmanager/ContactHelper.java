@@ -83,9 +83,10 @@ public class ContactHelper extends HelperBase {
     }
 
     private void groupInAddContact(ContactData contactData, boolean creation) {
-        if (contactData.getGroupName() != null) {
+        if (contactData.getGroups().size() > 0) {
+            Assert.assertTrue(contactData.getGroups().size() == 1);
             if (creation) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroupName());
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
             } else {
                 Assert.assertFalse(isElementPresent(By.name("new_group")));
             }

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.tsqa.pft.addressbook.model.ContactData;
 import ru.tsqa.pft.addressbook.model.Contacts;
 import ru.tsqa.pft.addressbook.model.GroupData;
+import ru.tsqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -68,8 +69,9 @@ public class AddContactTest extends TestBase {
 
     @Test
     public void testAddContact() {
+        Groups groups = app.db().groups();
         File photo = new File("src/test/resources/cat.jpg");
-        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);
+        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo).inGroup(groups.iterator().next());
 
         app.goTo().gotoHomePage();
         Contacts before = app.db().contacts();

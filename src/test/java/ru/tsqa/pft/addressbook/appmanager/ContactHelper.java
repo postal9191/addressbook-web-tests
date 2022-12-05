@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.tsqa.pft.addressbook.model.ContactData;
 import ru.tsqa.pft.addressbook.model.Contacts;
+import ru.tsqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -93,11 +94,29 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    public void addToGroup(ContactData contact, GroupData group){
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+        wd.findElement(By.name("add")).click();
+        wd.get("http://localhost/addressbook/");
+    }
+
+    public void removeGroup(ContactData contact, GroupData group){
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+        selectContactById(contact.getId());
+        wd.findElement(By.name("remove")).click();
+        wd.get("http://localhost/addressbook/");
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void returnHomePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public void selectContact(int index) {

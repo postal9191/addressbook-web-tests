@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1" >
-    <test name="Groups" >
+<suite name="Suite1" verbose="1">
+    <test name="Contacts">
         <classes>
-            <class name="ru.tsqa.pft.addressbook.tests.AddContactTest" />
-            <class name="ru.tsqa.pft.addressbook.tests.ContactModificationTest" />
-            <class name="ru.tsqa.pft.addressbook.tests.DelContactTest" />
+            <class name="ru.tsqa.pft.addressbook.tests.AddContactTest"/>
+            <class name="ru.tsqa.pft.addressbook.tests.ContactModificationTest"/>
+            <class name="ru.tsqa.pft.addressbook.tests.DelContactTest"/>
         </classes>
     </test>
 </suite>

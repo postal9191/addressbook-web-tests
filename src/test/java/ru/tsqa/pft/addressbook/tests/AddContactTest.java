@@ -71,7 +71,7 @@ public class AddContactTest extends TestBase {
     public void testAddContact() {
         Groups groups = app.db().groups();
         File photo = new File("src/test/resources/cat.jpg");
-        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo).inGroup(groups.iterator().next());
+        ContactData contact = new ContactData().setFirstName("Pupkin").setLastName("Makar").setPhoto(photo);//.inGroup(groups.iterator().next());
 
         app.goTo().gotoHomePage();
         Contacts before = app.db().contacts();

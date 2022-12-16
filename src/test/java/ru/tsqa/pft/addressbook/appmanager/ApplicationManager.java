@@ -41,13 +41,13 @@ public class ApplicationManager {
 
         if("".equals(properties.getProperty("selenium.server"))) {
             if (browser.equals(BrowserType.CHROME)) {
-                System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\107\\chromedriver.exe");
+                //System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\107\\chromedriver.exe");
                 wd = new ChromeDriver();
             } else if (browser.equals(BrowserType.FIREFOX)) {
                 System.setProperty("webdriver.gecko.driver", "c:\\chromedriver\\geckodriver.exe");
                 wd = new FirefoxDriver();
             } else if (browser.equals(BrowserType.OPERA)) {
-                System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\operadriver.exe");
+                //System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\operadriver.exe");
                 wd = new ChromeDriver();//построен на базе Хромиум
             }
         } else {

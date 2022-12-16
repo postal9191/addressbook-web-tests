@@ -37,7 +37,7 @@ public class ApplicationManager {
         dbHelper = new DbHelper();
 
         if (browser.equals(BrowserType.CHROME)) {
-            System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\105\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "c:\\chromedriver\\107\\chromedriver.exe");
             wd = new ChromeDriver();
         } else if (browser.equals(BrowserType.FIREFOX)) {
             System.setProperty("webdriver.gecko.driver", "c:\\chromedriver\\geckodriver.exe");
